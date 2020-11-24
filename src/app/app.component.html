@@ -1,0 +1,17 @@
+<form class="example-form">
+  <h3>Select and type to search name</h3>
+  <mat-form-field class="example-full-width">
+    <mat-label>Select</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [formControl]="userFormControl">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="display">
+      <mat-option *ngIf="loading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-option>
+      <ng-container *ngIf="!loading">
+        <mat-option *ngFor="let option of inputChanged | async" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
